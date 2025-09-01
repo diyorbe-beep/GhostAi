@@ -24,6 +24,20 @@
   gap: 15px;
 }
 
+.menu-toggle {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.menu-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
 .ghost-logo {
   font-size: 32px;
   animation: float 3s ease-in-out infinite;
@@ -401,16 +415,146 @@
     background: #00d4aa;
 }
 
+/* Test connection button */
+.test-connection {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.test-button {
+    background: linear-gradient(135deg, #00ff88, #00d4aa);
+    color: #0f2027;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 255, 136, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px; /* Touch target optimization */
+}
+
+.test-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.5);
+    background: linear-gradient(135deg, #00d4aa, #00ff88);
+}
+
+/* Small screen test button optimization */
+@media (max-width: 300px) {
+    .test-connection {
+        margin: 15px 0;
+    }
+    
+    .test-button {
+        padding: 10px 20px;
+        font-size: 12px;
+        border-radius: 20px;
+        min-height: 40px;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
 /* Responsive design */
+@media (max-width: 1200px) {
+    .main_container {
+        max-width: 800px;
+        padding: 0 25px;
+    }
+    
+    .main .greet {
+        font-size: 48px;
+        margin: 40px 0;
+    }
+    
+    .main .cards {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 18px;
+        padding: 18px;
+    }
+    
+    .main .card {
+        height: 160px;
+        padding: 18px;
+    }
+    
+    .menu-toggle {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main_container {
+        max-width: 700px;
+        padding: 0 20px;
+    }
+    
+    .main .greet {
+        font-size: 44px;
+        margin: 35px 0;
+    }
+    
+    .main .greet p:last-child {
+        font-size: 22px;
+    }
+    
+    .main .cards {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+        padding: 16px;
+    }
+    
+    .main .card {
+        height: 150px;
+        padding: 16px;
+    }
+    
+    .main .card p {
+        font-size: 15px;
+    }
+    
+    .main .card img {
+        width: 30px;
+        padding: 7px;
+    }
+    
+    .menu-toggle {
+        width: 20px;
+        height: 20px;
+    }
+}
+
 @media (max-width: 768px) {
+    .main_container {
+        max-width: 600px;
+        padding: 0 18px;
+    }
+    
     .main .greet {
         font-size: 40px;
         margin: 30px 0;
+        padding: 18px;
+    }
+    
+    .main .greet p:last-child {
+        font-size: 20px;
     }
     
     .main .cards {
         grid-template-columns: 1fr;
         gap: 15px;
+        padding: 15px;
+        margin-bottom: 40px;
+    }
+    
+    .main .card {
+        height: 140px;
         padding: 15px;
     }
     
@@ -427,5 +571,270 @@
     .search_box {
         padding: 12px 15px;
         border-radius: 20px;
+    }
+    
+    .test-button {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .chat_messages {
+        max-height: 60vh;
+    }
+    
+    .menu-toggle {
+        width: auto;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main_container {
+        padding: 0 15px;
+    }
+    
+    .main .greet {
+        font-size: 36px;
+        margin: 25px 0;
+        padding: 15px;
+    }
+    
+    .main .greet p:last-child {
+        font-size: 18px;
+        margin-top: 15px;
+    }
+    
+    .main .cards {
+        gap: 12px;
+        padding: 12px;
+        margin-bottom: 35px;
+    }
+    
+    .main .card {
+        height: 130px;
+        padding: 12px;
+        border-radius: 10px;
+    }
+    
+    .main .card p {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    
+    .main .card img {
+        width: 28px;
+        padding: 6px;
+        bottom: 12px;
+        right: 12px;
+    }
+    
+    .message_avatar {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+    }
+    
+    .ai-avatar {
+        font-size: 18px;
+    }
+    
+    .message_text {
+        font-size: 15px;
+    }
+    
+    .search_box {
+        padding: 10px 15px;
+        border-radius: 22px;
+    }
+    
+    .search_box input {
+        font-size: 15px;
+    }
+    
+    .send-button {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .send-button img {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .test-connection {
+        margin: 25px 0;
+    }
+    
+    .test-button {
+        padding: 11px 22px;
+        font-size: 13px;
+    }
+    
+    .menu-toggle {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Small phone optimization (300px and below) */
+@media (max-width: 300px) {
+    .main {
+        padding-bottom: 20vh;
+    }
+    
+    .main .nav {
+        padding: 10px;
+        font-size: 18px;
+    }
+    
+    .main .nav img {
+        width: 30px;
+    }
+    
+    .main_container {
+        padding: 0 10px;
+    }
+    
+    .main .greet {
+        font-size: 28px;
+        margin: 20px 0;
+        padding: 10px;
+    }
+    
+    .main .greet p:last-child {
+        font-size: 18px;
+        margin-top: 15px;
+    }
+    
+    .main .cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .main .card {
+        height: 140px;
+        padding: 15px;
+        border-radius: 8px;
+    }
+    
+    .main .card p {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    
+    .main .card img {
+        width: 25px;
+        padding: 6px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .test-connection {
+        margin: 20px 0;
+    }
+    
+    .test-button {
+        padding: 8px 16px;
+        font-size: 12px;
+        border-radius: 20px;
+    }
+    
+    .chat_messages {
+        padding: 10px 0;
+        max-height: 60vh;
+    }
+    
+    .message {
+        padding: 10px 0;
+    }
+    
+    .message_avatar {
+        width: 28px;
+        height: 28px;
+        margin-right: 8px;
+    }
+    
+    .ai-avatar {
+        font-size: 16px;
+    }
+    
+    .message_content {
+        max-width: calc(100% - 36px);
+    }
+    
+    .message_header {
+        margin-bottom: 6px;
+    }
+    
+    .role_name {
+        font-size: 12px;
+    }
+    
+    .timestamp {
+        font-size: 10px;
+    }
+    
+    .message_text {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    
+    .main-bottom {
+        padding: 0px 10px;
+    }
+    
+    .search_box {
+        padding: 10px 15px;
+        border-radius: 20px;
+        gap: 15px;
+    }
+    
+    .search_box input {
+        font-size: 14px;
+    }
+    
+    .search_box input::placeholder {
+        font-size: 14px;
+    }
+    
+    .send-button {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .send-button img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .error-message {
+        padding: 10px 15px;
+        margin: 10px 0;
+        font-size: 12px;
+    }
+    
+    .bottom_info {
+        font-size: 10px;
+        margin-top: 15px;
+        line-height: 1.4;
+        padding: 0 10px;
+    }
+    
+    /* Adjust typing indicator for small screens */
+    .typing-indicator span {
+        width: 6px;
+        height: 6px;
+    }
+    
+    /* Optimize scrollbar for small screens */
+    .chat_messages::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    .menu-toggle {
+        width: 14px;
+        height: 14px;
     }
 }

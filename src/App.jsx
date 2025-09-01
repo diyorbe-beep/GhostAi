@@ -8,6 +8,7 @@ export default function App() {
   const [recentChats, setRecentChats] = useState([]) // qo'shildi
   const [currentUser, setCurrentUser] = useState(null) // qo'shildi
   const [savedQuestions, setSavedQuestions] = useState([]) // Yangi: saqlangan savollar
+  const [sidebarOpen, setSidebarOpen] = useState(false) // Yangi: sidebar holati
 
   // localStorage dan ma'lumotlarni yuklash
   useEffect(() => {
@@ -117,6 +118,11 @@ export default function App() {
     }
   }
 
+  // Sidebar toggle funksiyasi
+  const toggleSidebar = () => {
+    setSidebarOpen(prev => !prev)
+  }
+
   return (
     <>
       <Sidebar 
@@ -124,12 +130,15 @@ export default function App() {
         recentChats={recentChats} 
         savedQuestions={savedQuestions}
         onClearData={clearAllData}
+        isOpen={sidebarOpen}
+        onToggle={toggleSidebar}
       />
       <Main 
         messages={messages} 
         currentUser={currentUser} 
         onMessagesUpdate={handleMessagesUpdate}
         onSaveQuestion={handleSaveQuestion}
+        onToggleSidebar={toggleSidebar}
       />
       {/* Auth ham qo'shmoqchi bo'lsang shu yerga joylashtirasan */}
       {/* <Auth setCurrentUser={setCurrentUser} /> */}

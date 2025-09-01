@@ -1,15 +1,113 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family:  'Outfit', sans-serif;
+  font-family: 'Outfit', sans-serif;
 }
+
 #root{
   min-height: 100vh;
   display: flex;
+}
+
+body{
+  overflow-x: hidden;
+}
+
+/* Global responsive adjustments */
+@media (max-width: 1200px) {
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Optimize for medium screens */
+  button, 
+  .card, 
+  .chat-entry, 
+  .question-entry {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 1024px) {
+  body {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  
+  /* Optimize for tablets */
+  button, 
+  .card, 
+  .chat-entry, 
+  .question-entry {
+    min-height: 46px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  /* Optimize for mobile */
+  button, 
+  .card, 
+  .chat-entry, 
+  .question-entry {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  /* Optimize for small mobile */
+  button, 
+  .card, 
+  .chat-entry, 
+  .question-entry {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 300px) {
+  * {
+    font-size: 14px;
+  }
+  
+  body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  /* Optimize touch targets for small screens */
+  button, 
+  .card, 
+  .chat-entry, 
+  .question-entry {
+    min-height: 44px;
+  }
+  
+  /* Improve scrolling on small screens */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #1a3a47;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #00ff88;
+    border-radius: 2px;
+  }
 }
 
  

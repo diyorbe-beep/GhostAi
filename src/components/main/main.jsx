@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import './main.css'
 import { assets } from '../../assets/assets'
+import { API_ENDPOINTS, ALTERNATIVE_CORS_PROXIES, BACKEND_URL } from '../../config/backend'
 
-const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion }) => {
+const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar }) => {
     const [input, setInput] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
@@ -53,7 +54,8 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion }) => {
         setError(null)
 
         try {
-            const response = await fetch('/api/chat', {
+            // Try direct connection first
+            const response = await fetch(API_ENDPOINTS.CHAT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,8 +84,62 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion }) => {
                 onSaveQuestion(input, data.response)
             }
         } catch (error) {
-            console.error('Error:', error)
-            setError(error.message)
+            console.error('Direct connection failed:', error)
+            
+            // If it's a CORS error, try alternative proxies
+            if (error.message.includes('Failed to fetch') || error.message.includes('CORS') || error.message.includes('Unexpected token')) {
+                console.log('CORS error detected, trying alternative proxies...')
+                
+                for (const proxy of ALTERNATIVE_CORS_PROXIES) {
+                    try {
+                        const proxyUrl = `${proxy}${BACKEND_URL}/api/chat`
+                        console.log(`Trying proxy: ${proxy}`)
+                        
+                        const proxyResponse = await fetch(proxyUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ message: input })
+                        })
+                        
+                        if (proxyResponse.ok) {
+                            let proxyData
+                            try {
+                                proxyData = await proxyResponse.json()
+                            } catch (parseError) {
+                                console.log('Failed to parse proxy response as JSON:', parseError)
+                                continue
+                            }
+                            
+                            if (proxyData && proxyData.response) {
+                                const aiMessage = {
+                                    role: 'assistant',
+                                    content: proxyData.response,
+                                    timestamp: new Date().toLocaleTimeString()
+                                }
+                                
+                                const updatedMessages = [...newMessages, aiMessage]
+                                onMessagesUpdate(updatedMessages)
+                                
+                                if (onSaveQuestion) {
+                                    onSaveQuestion(input, proxyData.response)
+                                }
+                                
+                                return // Success with proxy, exit the function
+                            }
+                        }
+                    } catch (proxyError) {
+                        console.log(`Proxy ${proxy} failed:`, proxyError.message)
+                        continue
+                    }
+                }
+                
+                // If all proxies fail, show error
+                setError('CORS error: All connection methods failed. Please check your backend CORS configuration.')
+            } else {
+                setError(error.message)
+            }
             
             const errorMessage = {
                 role: 'assistant',
@@ -111,15 +167,44 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion }) => {
 
     const testGeminiConnection = async () => {
         try {
-            const response = await fetch('/api/test-gemini')
+            // Try direct connection first
+            const response = await fetch(API_ENDPOINTS.TEST_GEMINI)
             const data = await response.json()
             if (data.status === 'OK') {
-                alert('✅ Gemini API is working correctly!')
+                alert('✅ Gemini API is working correctly with direct connection!')
+                return
             } else {
                 alert('❌ Gemini API test failed')
             }
         } catch (error) {
-            alert('❌ Cannot connect to Gemini API')
+            console.error('Direct connection failed, trying alternative proxies...')
+            // Try alternative CORS proxies
+            for (const proxy of ALTERNATIVE_CORS_PROXIES) {
+                try {
+                    const testUrl = `${proxy}${BACKEND_URL}/api/test-gemini`
+                    console.log(`Trying proxy: ${proxy}`)
+                    const response = await fetch(testUrl)
+                    
+                    if (response.ok) {
+                        let data
+                        try {
+                            data = await response.json()
+                        } catch (parseError) {
+                            console.log('Failed to parse proxy response as JSON:', parseError)
+                            continue
+                        }
+                        
+                        if (data && data.status === 'OK') {
+                            alert(`✅ Gemini API working with proxy: ${proxy}`)
+                            return
+                        }
+                    }
+                } catch (proxyError) {
+                    console.log(`Proxy ${proxy} failed:`, proxyError.message)
+                    continue
+                }
+            }
+            alert('❌ Cannot connect to Gemini API with any method. Please check your backend.')
         }
     }
 
@@ -137,10 +222,16 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion }) => {
 
     return (
         <div className='main'>
-                                    <div className="nav">
-                            <div className="brand">
-                                <p>GhostIQ</p>
-                            </div>
+            <div className="nav">
+                <div className="brand">
+                    <img 
+                        className="menu-toggle" 
+                        onClick={onToggleSidebar} 
+                        src={assets.menu_icon} 
+                        alt="Menu" 
+                    />
+                    <p>GhostIQ</p>
+                </div>
                 <div className="nav-controls">
                     <img src={assets.user_icon} alt="" />
                 </div>

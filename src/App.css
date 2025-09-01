@@ -1,1 +1,64 @@
+/* Main App Layout */
+#root {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
 
+/* Responsive design for different screen sizes */
+@media (max-width: 1200px) {
+  #root {
+    min-height: 100vh;
+  }
+  
+  .main {
+    flex: 1;
+    min-width: 0;
+    margin-left: 0; /* Remove margin since sidebar is now overlay */
+  }
+}
+
+@media (max-width: 1024px) {
+  .main {
+    flex: 1;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  #root {
+    flex-direction: column;
+  }
+  
+  .main {
+    order: 1;
+    flex: 1;
+    margin-left: 0;
+  }
+}
+
+/* Extra small phone optimization (300px and below) */
+@media (max-width: 300px) {
+  #root {
+    min-height: 100vh;
+  }
+  
+  .main {
+    padding-bottom: 25vh;
+    margin-left: 0;
+  }
+}
+
+/* Landscape orientation for small phones */
+@media (max-width: 300px) and (orientation: landscape) {
+  #root {
+    flex-direction: row;
+  }
+  
+  .main {
+    order: 2;
+    flex: 1;
+    padding-bottom: 15vh;
+    margin-left: 0;
+  }
+}
