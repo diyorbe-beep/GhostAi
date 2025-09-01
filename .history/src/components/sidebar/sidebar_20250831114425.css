@@ -1,0 +1,7 @@
+.sidebar{
+    min-width: 100vh;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: ;
+}

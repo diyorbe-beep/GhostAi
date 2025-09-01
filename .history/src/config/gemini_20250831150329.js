@@ -1,0 +1,1 @@
+const GhostAi = 'AIzaSyABigsgUnKm_9ew9fP6q2LlDUUURZY6cSE';
