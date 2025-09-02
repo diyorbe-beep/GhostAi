@@ -266,7 +266,7 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar
                                     {message.role === 'user' ? (
                                         <img src={assets.user_icon} alt="User" />
                                     ) : (
-                                        <div className="ai-avatar">🤖</div>
+                                       <div></div>
                                     )}
                                 </div>
                                 <div className="message_content">
@@ -285,7 +285,6 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar
                         {isLoading && (
                             <div className="message assistant">
                                 <div className="message_avatar">
-                                    <div className="ai-avatar">🤖</div>
                                 </div>
                                 <div className="message_content">
                                     <div className="message_header">

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './sidebar.css'
 import { assets } from '../../assets/assets'
+import { FaBars } from "react-icons/fa";
 
 const Sidebar = ({ onNewChat, recentChats = [], savedQuestions = [], onClearData, isOpen, onToggle }) => {
   const [activeTab, setActiveTab] = useState('recent') // 'recent' yoki 'questions'
@@ -50,7 +51,7 @@ const Sidebar = ({ onNewChat, recentChats = [], savedQuestions = [], onClearData
       {/* Sidebar */}
       <div className={`sidebar ${isOpen ? 'extended' : ''}`}>
         <div className="top">
-          <img className='menu' onClick={onToggle} src={assets.menu_icon} alt="" />
+          <FaBars className='menu' onClick={onToggle} />
           <div className="new_chat" onClick={handleNewChat}>
             <img src={assets.plus_icon} alt="" />
             {isOpen?<p>New Chat</p>:null}
