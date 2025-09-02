@@ -272,7 +272,7 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar
                                 <div className="message_content">
                                     <div className="message_header">
                                         <span className="role_name">
-                                            {message.role === 'user' ? 'You' : 'GhostIQ'}
+                                            {message.role === 'user' ? 'You' : ''}
                                         </span>
                                         <span className="timestamp">{message.timestamp}</span>
                                     </div>
