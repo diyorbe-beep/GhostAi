@@ -288,7 +288,7 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar
                                 </div>
                                 <div className="message_content">
                                     <div className="message_header">
-                                        <span className="role_name">GhostIQ</span>
+                                        <span className="role_name"></span>
                                         <span className="timestamp">typing...</span>
                                     </div>
                                     <div className="typing-indicator">
