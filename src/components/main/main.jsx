@@ -3,6 +3,7 @@ import './main.css'
 import { assets } from '../../assets/assets'
 import { FaBars } from "react-icons/fa";
 import { API_ENDPOINTS, ALTERNATIVE_CORS_PROXIES, BACKEND_URL } from '../../config/backend'
+import { sendOpenAIMessage } from '../../config/openai'
 
 const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar }) => {
     const [input, setInput] = useState('')
@@ -136,10 +137,40 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar
                     }
                 }
                 
-                // If all proxies fail, show error
-                setError('CORS error: All connection methods failed. Please check your backend CORS configuration.')
+                // If all proxies fail, try OpenAI fallback
+                try {
+                    const aiText = await sendOpenAIMessage({ message: input, history: newMessages })
+                    const aiMessage = {
+                        role: 'assistant',
+                        content: aiText,
+                        timestamp: new Date().toLocaleTimeString()
+                    }
+                    const updatedMessages = [...newMessages, aiMessage]
+                    onMessagesUpdate(updatedMessages)
+                    if (onSaveQuestion) onSaveQuestion(input, aiText)
+                    return
+                } catch (openAiErr) {
+                    console.log('OpenAI fallback failed:', openAiErr.message)
+                }
+                // If everything fails
+                setError('All connection methods failed (backend, proxies, OpenAI). Check settings.')
             } else {
-                setError(error.message)
+                // Non-CORS error: attempt OpenAI fallback once
+                try {
+                    const aiText = await sendOpenAIMessage({ message: input, history: newMessages })
+                    const aiMessage = {
+                        role: 'assistant',
+                        content: aiText,
+                        timestamp: new Date().toLocaleTimeString()
+                    }
+                    const updatedMessages = [...newMessages, aiMessage]
+                    onMessagesUpdate(updatedMessages)
+                    if (onSaveQuestion) onSaveQuestion(input, aiText)
+                    return
+                } catch (openAiErr) {
+                    console.log('OpenAI fallback failed:', openAiErr.message)
+                    setError(error.message)
+                }
             }
             
             const errorMessage = {
