@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 import Sidebar from './components/sidebar/sidebar'
 import Main from './components/main/main' // Main component ham kerak bo'ladi
+import Auth from './components/auth/auth'
 
 export default function App() {
   const [messages, setMessages] = useState([])
@@ -41,6 +42,12 @@ export default function App() {
         console.error('Error loading current chat:', error)
       }
     }
+  }, [])
+
+  // Username (register) load
+  useEffect(() => {
+    const savedName = localStorage.getItem('ghostiq-username')
+    if (savedName) setCurrentUser({ name: savedName })
   }, [])
 
   // Ma'lumotlarni localStorage ga saqlash
@@ -140,8 +147,9 @@ export default function App() {
         onSaveQuestion={handleSaveQuestion}
         onToggleSidebar={toggleSidebar}
       />
-      {/* Auth ham qo'shmoqchi bo'lsang shu yerga joylashtirasan */}
-      {/* <Auth setCurrentUser={setCurrentUser} /> */}
+      {!currentUser && (
+        <Auth setCurrentUser={setCurrentUser} />
+      )}
     </>
   )
 }

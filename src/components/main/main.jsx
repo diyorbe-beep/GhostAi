@@ -5,7 +5,7 @@ import { FaBars } from "react-icons/fa";
 import { API_ENDPOINTS, ALTERNATIVE_CORS_PROXIES, BACKEND_URL } from '../../config/backend'
 import { sendOpenAIMessage } from '../../config/openai'
 
-const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar }) => {
+const Main = ({ messages = [], currentUser, onMessagesUpdate, onSaveQuestion, onToggleSidebar }) => {
     const [input, setInput] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
@@ -57,7 +57,8 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar
 
         // Primary: OpenAI (ChatGPT)
         try {
-            const aiText = await sendOpenAIMessage({ message: input, history: newMessages })
+            const systemPrefix = currentUser?.name ? `User name is ${currentUser.name}. Address the user by this name in your replies. ` : ''
+            const aiText = await sendOpenAIMessage({ message: systemPrefix + input, history: newMessages })
             const aiMessage = {
                 role: 'assistant',
                 content: aiText,
