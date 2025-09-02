@@ -583,6 +583,7 @@
     .menu-toggle {
         width: auto;
         height: 20px;
+        color: var(--text);
     }
 }
 
