@@ -55,6 +55,23 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar
         setIsLoading(true)
         setError(null)
 
+        // Primary: OpenAI (ChatGPT)
+        try {
+            const aiText = await sendOpenAIMessage({ message: input, history: newMessages })
+            const aiMessage = {
+                role: 'assistant',
+                content: aiText,
+                timestamp: new Date().toLocaleTimeString()
+            }
+            const updatedMessages = [...newMessages, aiMessage]
+            onMessagesUpdate(updatedMessages)
+            if (onSaveQuestion) onSaveQuestion(input, aiText)
+            return
+        } catch (openAiPrimaryError) {
+            console.log('OpenAI primary failed:', openAiPrimaryError.message)
+        }
+
+        // Fallback: Backend → Proxies → (existing OpenAI fallback remains)
         try {
             // Try direct connection first
             const response = await fetch(API_ENDPOINTS.CHAT, {
