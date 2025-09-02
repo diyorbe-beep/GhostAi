@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 :root{
-  --bg: #F5F5F5;
-  --text: #2E2E2E;
-  --muted-text: rgba(46,46,46,0.65);
+  --bg: #FAF3E0;
+  --text: #3E3E3E;
+  --muted-text: rgba(62,62,62,0.65);
   --panel: #FFFFFF;
-  --panel-alt: #EEEEEE;
-  --border: rgba(46,46,46,0.12);
+  --panel-alt: #FFF7E6;
+  --border: rgba(62,62,62,0.12);
 
-  --primary: #4A90E2;
-  --primary-600: #3F7EC6;
-  --primary-700: #356CAA;
-  --primary-200: #BFD7F3;
-  --primary-100: #E7F0FB;
+  --primary: #8D6E63;
+  --primary-600: #7C5F56;
+  --primary-700: #6C514A;
+  --primary-200: #C6ADA5;
+  --primary-100: #EBDDD9;
   --on-primary: #ffffff;
 
-  --accent: #FF6F61;
-  --accent-600: #E46053;
-  --accent-100: #FFE3DF;
+  --accent: #FFC107;
+  --accent-600: #E0A806;
+  --accent-100: #FFEEB3;
 }
 
 *{
