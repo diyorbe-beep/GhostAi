@@ -30,6 +30,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   filter: none;
+  color: var(--text);
   opacity: 0.8;
 }
 
