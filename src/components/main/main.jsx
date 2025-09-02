@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import './main.css'
 import { assets } from '../../assets/assets'
+import { FaBars } from "react-icons/fa";
 import { API_ENDPOINTS, ALTERNATIVE_CORS_PROXIES, BACKEND_URL } from '../../config/backend'
 
 const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar }) => {
@@ -224,12 +225,7 @@ const Main = ({ messages = [], onMessagesUpdate, onSaveQuestion, onToggleSidebar
         <div className='main'>
             <div className="nav">
                 <div className="brand">
-                    <img 
-                        className="menu-toggle" 
-                        onClick={onToggleSidebar} 
-                        src={assets.menu_icon} 
-                        alt="Menu" 
-                    />
+                    <FaBars className="menu-toggle" onClick={onToggleSidebar}  />
                     <p>GhostIQ</p>
                 </div>
                 <div className="nav-controls">

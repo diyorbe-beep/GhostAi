@@ -49,8 +49,6 @@
     margin-left: 10px;
     cursor: pointer;
     filter: none;
-    color: var(--text);
-    background-color: var(--text);
 }
 
 .sidebar .new_chat{
