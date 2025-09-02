@@ -60,4 +60,15 @@
   background: var(--primary-600);
 }
 
+.auth-error{
+  margin-top: 10px;
+  color: var(--accent-600);
+  font-size: 13px;
+}
+
+.auth-button:disabled{
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 

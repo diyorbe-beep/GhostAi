@@ -59,14 +59,15 @@ const Main = ({ messages = [], currentUser, onMessagesUpdate, onSaveQuestion, on
         try {
             const systemPrefix = currentUser?.name ? `User name is ${currentUser.name}. Address the user by this name in your replies. ` : ''
             const aiText = await sendOpenAIMessage({ message: systemPrefix + input, history: newMessages })
+            const prefixed = currentUser?.name ? `${currentUser.name}: ${aiText}` : aiText
             const aiMessage = {
                 role: 'assistant',
-                content: aiText,
+                content: prefixed,
                 timestamp: new Date().toLocaleTimeString()
             }
             const updatedMessages = [...newMessages, aiMessage]
             onMessagesUpdate(updatedMessages)
-            if (onSaveQuestion) onSaveQuestion(input, aiText)
+            if (onSaveQuestion) onSaveQuestion(input, prefixed)
             return
         } catch (openAiPrimaryError) {
             console.log('OpenAI primary failed:', openAiPrimaryError.message)
@@ -92,7 +93,7 @@ const Main = ({ messages = [], currentUser, onMessagesUpdate, onSaveQuestion, on
             
             const aiMessage = {
                 role: 'assistant',
-                content: data.response,
+                content: currentUser?.name ? `${currentUser.name}: ${data.response}` : data.response,
                 timestamp: new Date().toLocaleTimeString()
             }
 
@@ -101,7 +102,7 @@ const Main = ({ messages = [], currentUser, onMessagesUpdate, onSaveQuestion, on
             
             // Save the question to sidebar
             if (onSaveQuestion) {
-                onSaveQuestion(input, data.response)
+                onSaveQuestion(input, currentUser?.name ? `${currentUser.name}: ${data.response}` : data.response)
             }
         } catch (error) {
             console.error('Direct connection failed:', error)
@@ -135,7 +136,7 @@ const Main = ({ messages = [], currentUser, onMessagesUpdate, onSaveQuestion, on
                             if (proxyData && proxyData.response) {
                                 const aiMessage = {
                                     role: 'assistant',
-                                    content: proxyData.response,
+                                    content: currentUser?.name ? `${currentUser.name}: ${proxyData.response}` : proxyData.response,
                                     timestamp: new Date().toLocaleTimeString()
                                 }
                                 
@@ -143,7 +144,7 @@ const Main = ({ messages = [], currentUser, onMessagesUpdate, onSaveQuestion, on
                                 onMessagesUpdate(updatedMessages)
                                 
                                 if (onSaveQuestion) {
-                                    onSaveQuestion(input, proxyData.response)
+                                    onSaveQuestion(input, currentUser?.name ? `${currentUser.name}: ${proxyData.response}` : proxyData.response)
                                 }
                                 
                                 return // Success with proxy, exit the function
@@ -158,14 +159,15 @@ const Main = ({ messages = [], currentUser, onMessagesUpdate, onSaveQuestion, on
                 // If all proxies fail, try OpenAI fallback
                 try {
                     const aiText = await sendOpenAIMessage({ message: input, history: newMessages })
+                    const prefixed = currentUser?.name ? `${currentUser.name}: ${aiText}` : aiText
                     const aiMessage = {
                         role: 'assistant',
-                        content: aiText,
+                        content: prefixed,
                         timestamp: new Date().toLocaleTimeString()
                     }
                     const updatedMessages = [...newMessages, aiMessage]
                     onMessagesUpdate(updatedMessages)
-                    if (onSaveQuestion) onSaveQuestion(input, aiText)
+                    if (onSaveQuestion) onSaveQuestion(input, prefixed)
                     return
                 } catch (openAiErr) {
                     console.log('OpenAI fallback failed:', openAiErr.message)
@@ -176,14 +178,15 @@ const Main = ({ messages = [], currentUser, onMessagesUpdate, onSaveQuestion, on
                 // Non-CORS error: attempt OpenAI fallback once
                 try {
                     const aiText = await sendOpenAIMessage({ message: input, history: newMessages })
+                    const prefixed = currentUser?.name ? `${currentUser.name}: ${aiText}` : aiText
                     const aiMessage = {
                         role: 'assistant',
-                        content: aiText,
+                        content: prefixed,
                         timestamp: new Date().toLocaleTimeString()
                     }
                     const updatedMessages = [...newMessages, aiMessage]
                     onMessagesUpdate(updatedMessages)
-                    if (onSaveQuestion) onSaveQuestion(input, aiText)
+                    if (onSaveQuestion) onSaveQuestion(input, prefixed)
                     return
                 } catch (openAiErr) {
                     console.log('OpenAI fallback failed:', openAiErr.message)

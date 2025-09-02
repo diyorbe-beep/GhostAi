@@ -3,6 +3,17 @@ import './auth.css'
 
 export default function Auth({ setCurrentUser }) {
   const [name, setName] = useState('')
+  const [error, setError] = useState('')
+
+  const forbidden = [
+    'ghost', 'ghostjon', 'ghostiq', 'ghosti', 'ghostik',
+    'ghost ai', 'ghost-ai', 'ghost aiq', 'ghost app'
+  ]
+
+  const isForbidden = (value) => {
+    const v = String(value || '').toLowerCase().trim()
+    return forbidden.some(word => v.includes(word))
+  }
 
   useEffect(() => {
     const saved = localStorage.getItem('ghostiq-username')
@@ -12,10 +23,28 @@ export default function Auth({ setCurrentUser }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     const trimmed = name.trim()
-    if (!trimmed) return
+    if (!trimmed) {
+      setError('Ism kiritish kerak')
+      return
+    }
+    if (isForbidden(trimmed)) {
+      setError('Bu so\'zlarni ishlatish taqiqlangan')
+      return
+    }
     const user = { name: trimmed }
     localStorage.setItem('ghostiq-username', trimmed)
     setCurrentUser(user)
+  }
+
+  const onChange = (e) => {
+    const v = e.target.value
+    setName(v)
+    if (!v.trim()) {
+      setError('')
+      return
+    }
+    if (isForbidden(v)) setError('Bu so\'zlarni ishlatish taqiqlangan')
+    else setError('')
   }
 
   return (
@@ -27,10 +56,11 @@ export default function Auth({ setCurrentUser }) {
           type="text"
           placeholder="Masalan: Ali"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={onChange}
           className="auth-input"
         />
-        <button type="submit" className="auth-button">Continue</button>
+        {error ? <div className="auth-error">❌ {error}</div> : null}
+        <button type="submit" className="auth-button" disabled={Boolean(error) || !name.trim()}>Continue</button>
       </form>
     </div>
   )
