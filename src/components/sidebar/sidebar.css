@@ -4,9 +4,9 @@
     display: inline-flex;
     flex-direction: column;
     justify-content: space-between;
-    background: linear-gradient(135deg, #0f2027, #203a43);
+    background: var(--panel);
     padding: 25px 15px;
-    border-right: 1px solid #1a3a47;
+    border-right: 1px solid var(--border);
     position: fixed;
     top: 0;
     left: 0;
@@ -14,7 +14,7 @@
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     width: 300px;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.06);
 }
 
 .sidebar.extended {
@@ -48,7 +48,7 @@
     display: block;
     margin-left: 10px;
     cursor: pointer;
-    filter: brightness(0) invert(1);
+    filter: none;
 }
 
 .sidebar .new_chat{
@@ -57,19 +57,19 @@
     align-items: center;
     gap: 10px;
     padding: 12px 18px;
-    background: linear-gradient(135deg, #00ff88, #00d4aa);
+    background: var(--primary);
     border-radius: 50px;
     font-size: 14px;
-    color: #0f2027;
+    color: var(--on-primary);
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.25);
     font-weight: 600;
 }
 
 .sidebar .new_chat:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.5);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.35);
 }
 
 .ai-info {
@@ -78,26 +78,26 @@
     gap: 10px;
     margin-top: 20px;
     padding: 10px;
-    background: linear-gradient(135deg, #1a3a47, #2c5364);
+    background: var(--primary-100);
     border-radius: 10px;
-    border: 1px solid #00ff88;
+    border: 1px solid var(--primary-200);
 }
 
 .ai-avatar-small {
     width: 24px;
     height: 24px;
-    background: linear-gradient(135deg, #00ff88, #00d4aa);
+    background: var(--primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
-    color: #0f2027;
+    color: var(--on-primary);
 }
 
 .ai-info p {
     font-size: 12px;
-    color: #b8e6d4;
+    color: var(--muted-text);
     margin: 0;
 }
 
@@ -112,10 +112,10 @@
 .tab-btn {
     flex: 1;
     padding: 8px 12px;
-    background: linear-gradient(135deg, #1a3a47, #2c5364);
-    border: 1px solid #1a3a47;
+    background: var(--panel-alt);
+    border: 1px solid var(--border);
     border-radius: 8px;
-    color: #b8e6d4;
+    color: var(--text);
     font-size: 11px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -123,14 +123,14 @@
 }
 
 .tab-btn:hover {
-    background: linear-gradient(135deg, #2c5364, #1a3a47);
-    border-color: #00ff88;
+    background: var(--primary-100);
+    border-color: var(--primary-200);
 }
 
 .tab-btn.active {
-    background: linear-gradient(135deg, #00ff88, #00d4aa);
-    color: #0f2027;
-    border-color: #00ff88;
+    background: var(--primary);
+    color: var(--on-primary);
+    border-color: var(--primary);
     font-weight: 600;
 }
 
@@ -142,7 +142,7 @@
 .sidebar .recent-title{
     margin-top: 30px;
     margin-bottom:  20px;
-    color: #00ff88;
+    color: var(--primary-700);
     font-weight: 600;
 }
 
@@ -153,15 +153,15 @@
     padding: 10px;
     padding-right: 40px;
     border-radius: 50px;
-    color: #ffffff;
+    color: var(--text);
     cursor: pointer;
     transition: .3s;
     margin-bottom: 5px;
 }
 
 .sidebar .recent-entry:hover{
-    background: linear-gradient(135deg, #1a3a47, #2c5364);
-    border: 1px solid #00ff88;
+    background: var(--primary-100);
+    border: 1px solid var(--primary-200);
 }
 
 /* Questions section */
@@ -173,7 +173,7 @@
 .questions-title {
     margin-top: 30px;
     margin-bottom: 20px;
-    color: #00ff88;
+    color: var(--primary-700);
     font-weight: 600;
 }
 
@@ -183,17 +183,17 @@
     gap: 10px;
     padding: 12px;
     border-radius: 10px;
-    color: #ffffff;
+    color: var(--text);
     cursor: pointer;
     transition: .3s;
     margin-bottom: 8px;
-    background: linear-gradient(135deg, #1a3a47, #2c5364);
-    border: 1px solid transparent;
+    background: var(--panel-alt);
+    border: 1px solid var(--border);
 }
 
 .question-entry:hover {
-    background: linear-gradient(135deg, #2c5364, #1a3a47);
-    border-color: #00ff88;
+    background: var(--primary-100);
+    border-color: var(--primary-200);
     transform: translateX(5px);
 }
 
@@ -209,7 +209,7 @@
 }
 
 .question-text {
-    color: #ffffff;
+    color: var(--text);
     font-size: 12px;
     line-height: 1.4;
     margin: 0 0 5px 0;
@@ -217,7 +217,7 @@
 }
 
 .question-date {
-    color: #b8e6d4;
+    color: var(--muted-text);
     font-size: 10px;
     margin: 0;
     opacity: 0.8;
@@ -227,18 +227,18 @@
 .clear-data-section {
     margin-top: 30px;
     padding: 15px;
-    background: linear-gradient(135deg, #2c1810, #3d2418);
+    background: var(--accent-100);
     border-radius: 10px;
-    border: 1px solid #ff4444;
+    border: 1px solid var(--accent-600);
 }
 
 .clear-data-btn {
     width: 100%;
     padding: 10px;
-    background: linear-gradient(135deg, #ff4444, #cc3333);
+    background: var(--accent);
     border: none;
     border-radius: 8px;
-    color: white;
+    color: var(--on-primary);
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
@@ -247,13 +247,13 @@
 }
 
 .clear-data-btn:hover {
-    background: linear-gradient(135deg, #ff6666, #ff4444);
+    background: var(--accent-600);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+    box-shadow: 0 4px 12px rgba(255, 111, 97, 0.35);
 }
 
 .clear-data-info {
-    color: #ffcccc;
+    color: var(--accent-600);
     font-size: 10px;
     text-align: center;
     margin: 0;
