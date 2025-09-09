@@ -1,23 +1,82 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 :root{
-  --bg: #121212;
-  --text: #E0E0E0;
-  --muted-text: rgba(224,224,224,0.65);
-  --panel: #1E1E1E;
-  --panel-alt: #121212;
-  --border: rgba(224,224,224,0.12);
+  /* Base (Qora + Oq + Kulrang) */
+  --bg: #000000;
+  --text: #FFFFFF;
+  --muted-text: #7A7A7A;
+  --panel: #0D0D0D;
+  --panel-alt: #000000;
+  --border: rgba(255,255,255,0.12);
 
-  --primary: #03DAC6;
-  --primary-600: #00C6B3;
-  --primary-700: #00B3A2;
-  --primary-200: rgba(3,218,198,0.35);
-  --primary-100: rgba(3,218,198,0.15);
-  --on-primary: #0A0A0A;
+  /* Default primary as neutral gray */
+  --primary: #7A7A7A;
+  --primary-600: #6A6A6A;
+  --primary-700: #5C5C5C;
+  --primary-200: rgba(122,122,122,0.35);
+  --primary-100: rgba(122,122,122,0.15);
+  --on-primary: #000000;
 
-  --accent: #03DAC6;
-  --accent-600: #00C6B3;
-  --accent-100: rgba(3,218,198,0.15);
+  /* Accent (errors/warnings) */
+  --accent: #FF6F61;
+  --accent-600: #E65E52;
+  --accent-100: rgba(255,111,97,0.15);
+}
+
+/* Premium aksent temalari */
+.theme-premium-gold {
+  --primary: #FFD700;
+  --primary-600: #E6C200;
+  --primary-700: #CCAD00;
+  --primary-200: rgba(255,215,0,0.35);
+  --primary-100: rgba(255,215,0,0.15);
+  --on-primary: #000000;
+}
+
+.theme-premium-silver {
+  --primary: #C0C0C0;
+  --primary-600: #AFAFAF;
+  --primary-700: #9E9E9E;
+  --primary-200: rgba(192,192,192,0.35);
+  --primary-100: rgba(192,192,192,0.15);
+  --on-primary: #000000;
+}
+
+.theme-premium-platinum {
+  --primary: #E5E4E2;
+  --primary-600: #D2D1CF;
+  --primary-700: #BFBEBB;
+  --primary-200: rgba(229,228,226,0.35);
+  --primary-100: rgba(229,228,226,0.15);
+  --on-primary: #000000;
+}
+
+/* Energiya/kreativ temalar */
+.theme-tech-neon {
+  --primary: #00FFFF;
+  --primary-600: #00E0E0;
+  --primary-700: #00C2C2;
+  --primary-200: rgba(0,255,255,0.35);
+  --primary-100: rgba(0,255,255,0.15);
+  --on-primary: #001818;
+}
+
+.theme-royal-purple {
+  --primary: #6A0DAD;
+  --primary-600: #5C0B95;
+  --primary-700: #4E097E;
+  --primary-200: rgba(106,13,173,0.35);
+  --primary-100: rgba(106,13,173,0.15);
+  --on-primary: #ffffff;
+}
+
+.theme-electric-green {
+  --primary: #39FF14;
+  --primary-600: #2FDB0F;
+  --primary-700: #28BA0D;
+  --primary-200: rgba(57,255,20,0.35);
+  --primary-100: rgba(57,255,20,0.15);
+  --on-primary: #052006;
 }
 
 *{
