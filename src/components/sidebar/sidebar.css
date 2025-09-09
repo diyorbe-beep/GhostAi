@@ -65,6 +65,7 @@
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(74, 144, 226, 0.25);
     font-weight: 600;
+    gap: 8px;
 }
 
 .sidebar .new_chat:hover {
@@ -120,6 +121,9 @@
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .tab-btn:hover {
@@ -157,6 +161,8 @@
     cursor: pointer;
     transition: .3s;
     margin-bottom: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .sidebar .recent-entry:hover{
@@ -201,6 +207,11 @@
     font-size: 16px;
     margin-top: 2px;
     flex-shrink: 0;
+}
+
+.icon{
+    width: 18px;
+    height: 18px;
 }
 
 .question-content {

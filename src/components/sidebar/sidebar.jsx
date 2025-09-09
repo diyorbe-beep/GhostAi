@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import './sidebar.css'
 import { assets } from '../../assets/assets'
 import { FaBars } from "react-icons/fa";
+import { FiMessageSquare, FiHelpCircle, FiClock, FiSettings, FiPlusCircle, FiZap, FiTrash2 } from 'react-icons/fi'
 
 const Sidebar = ({ onNewChat, recentChats = [], savedQuestions = [], onClearData, isOpen, onToggle }) => {
   const [activeTab, setActiveTab] = useState('recent') // 'recent' yoki 'questions'
@@ -53,12 +54,12 @@ const Sidebar = ({ onNewChat, recentChats = [], savedQuestions = [], onClearData
         <div className="top">
           <FaBars className='menu' onClick={onToggle} />
           <div className="new_chat" onClick={handleNewChat}>
-            <img src={assets.plus_icon} alt="" />
+            <FiPlusCircle className="icon" />
             {isOpen?<p>New Chat</p>:null}
           </div>
           {isOpen && (
             <div className="ai-info">
-              <div className="ai-avatar-small">👻</div>
+              <div className="ai-avatar-small"><FiZap /></div>
               <p>Powered by GhostIQ</p>
             </div>
           )}
@@ -69,13 +70,13 @@ const Sidebar = ({ onNewChat, recentChats = [], savedQuestions = [], onClearData
                 className={`tab-btn ${activeTab === 'recent' ? 'active' : ''}`}
                 onClick={() => setActiveTab('recent')}
               >
-                💬 Recent
+                <FiMessageSquare className="icon" /> Recent
               </button>
               <button 
                 className={`tab-btn ${activeTab === 'questions' ? 'active' : ''}`}
                 onClick={() => setActiveTab('questions')}
               >
-                ❓ Questions
+                <FiHelpCircle className="icon" /> Questions
               </button>
             </div>
           )}
@@ -89,13 +90,13 @@ const Sidebar = ({ onNewChat, recentChats = [], savedQuestions = [], onClearData
                     onNewChat && onNewChat(chat)
                     onToggle && onToggle() // Close sidebar after loading chat
                   }}>
-                    <img src={assets.message_icon} alt="" />
+                    <FiMessageSquare className="icon" />
                     <p>{chat.title || `Chat ${index + 1}`}</p>
                   </div>
                 ))
               ) : (
                 <div className="recent-entry">
-                  <img src={assets.message_icon} alt="" />
+                  <FiMessageSquare className="icon" />
                   <p>No recent chats</p>
                 </div>
               )}
@@ -108,7 +109,7 @@ const Sidebar = ({ onNewChat, recentChats = [], savedQuestions = [], onClearData
               {savedQuestions.length > 0 ? (
                 savedQuestions.map((questionData, index) => (
                   <div key={questionData.id} className="question-entry" onClick={() => handleQuestionClick(questionData)}>
-                    <div className="question-icon">❓</div>
+                    <div className="question-icon"><FiHelpCircle className="icon" /></div>
                     <div className="question-content">
                       <p className="question-text">{questionData.question.slice(0, 40)}...</p>
                       <p className="question-date">{questionData.date}</p>
@@ -117,7 +118,7 @@ const Sidebar = ({ onNewChat, recentChats = [], savedQuestions = [], onClearData
                 ))
               ) : (
                 <div className="question-entry">
-                  <div className="question-icon">❓</div>
+                  <div className="question-icon"><FiHelpCircle className="icon" /></div>
                   <div className="question-content">
                     <p className="question-text">No saved questions yet</p>
                     <p className="question-date">Ask something to save it here</p>
@@ -138,7 +139,7 @@ const Sidebar = ({ onNewChat, recentChats = [], savedQuestions = [], onClearData
                 }}
                 title="Barcha ma'lumotlarni o'chirish"
               >
-                🗑️ Clear All Data
+                <FiTrash2 className="icon" /> Clear All Data
               </button>
               <p className="clear-data-info">
                 Bu tugma barcha saqlangan savollar, chatlar va ma'lumotlarni o'chiradi
@@ -148,15 +149,15 @@ const Sidebar = ({ onNewChat, recentChats = [], savedQuestions = [], onClearData
         </div>
         <div className="bottom">
           <div className='bottom_item recent-entry'>
-            <img src={assets.question_icon} alt="" />
+            <FiHelpCircle className="icon" />
             {isOpen?<p>Help</p>:null}
           </div>
           <div className='bottom_item recent-entry'>
-            <img src={assets.history_icon} alt="" />
+            <FiClock className="icon" />
             {isOpen?<p>Activity</p>:null}
           </div>
           <div className='bottom_item recent-entry'>
-            <img src={assets.setting_icon} alt="" />
+            <FiSettings className="icon" />
             {isOpen?<p>Settings</p>:null}
           </div>
         </div>
